@@ -21,6 +21,8 @@ jobs:
         run: make govet
       - name: Check order of imports
         run: make goimports-check
+      - name: Check if modules were tidied up
+        run: make tidy-check
 
   build_and_test:
     name: Build and test

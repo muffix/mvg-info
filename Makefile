@@ -1,6 +1,7 @@
 # Go parameters
 GOCMD=go
 GOBUILD=$(GOCMD) build
+GORUN=$(GOCMD) run
 GOCLEAN=$(GOCMD) clean
 GOGENERATE=$(GOCMD) generate
 GOGET=$(GOCMD) get
@@ -11,9 +12,9 @@ GOTEST=$(GOCMD) test
 GOVET=$(GOCMD) vet
 GOTOOL=$(GOCMD) tool
 
-BINARY_NAME=mvginfo
+BINARY_NAME=mvginfo.10m
 BASE_PACKAGE_NAME=github.com/muffix/mvg-info
-CMD_PACKAGE_NAME=cmd/mvginfo
+CMD_PACKAGE_NAME=cmd/bitbar
 
 TEST_REPORT_OUTPUT=test-report.out
 COVERAGE_OUTPUT=coverage.out
@@ -50,9 +51,7 @@ build:
         $(BASE_PACKAGE_NAME)/$(CMD_PACKAGE_NAME)
 
 run:
-	@mkdir -p build
-	$(GOBUILD) \
-		-o build/$(BINARY_NAME) \
+	$(GORUN) \
 		-v \
 		-ldflags="-w \
 				  -s \
@@ -60,7 +59,6 @@ run:
 				  -X github.com/muffix/mvg-info/internal/httpapi.pipelineID=dev \
 				  -X github.com/muffix/mvg-info/internal/httpapi.buildDate=$(shell date -u +%Y-%m-%dT%TZ)" \
 		$(BASE_PACKAGE_NAME)/$(CMD_PACKAGE_NAME)
-	build/$(BINARY_NAME)
 
 deps:
 	$(GOGET) -d -v ./...
