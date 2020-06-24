@@ -3,12 +3,18 @@
 MVG info is a simple tool to fetch interruption notifications for Munich's public transport system. 
 It currently outputs the data in a [BitBar]-compatible way.
 
+![](https://user-images.githubusercontent.com/12208771/85631491-ebb29680-b675-11ea-9e7d-fe7ac65eeed7.png)
+
 ## Installation
 
 1. Install [BitBar]. If you're using [homebrew], you can use `brew cask install bitbar`.
-1. Download the binary for Mac OS from the [Releases] page into your BitBar plugin directory. 
-
-Alternatively, you can clone the repository and run `make build`
+1. Install the plugin by doing one of the following options:
+    1. Click [here](bitbar://openPlugin?src=https://github.com/muffix/mvg-info/releases/latest/download/mvginfo.10m) and confirm
+    1. Download the plugin from the [Releases] page into your BitBar plugin directory
+    1. Clone the repository, run `make build` to compile, and then copy it into your BitBar plugin directory
+    
+The plugin updates every 10 minutes by default. This can be changed (e.g. to every 5 minutes) by renaming the binary 
+in the BitBar plugin directory from `mvginfo.10m` to `mvginfo.5m`. 
 
 ## Developing
 
