@@ -2,6 +2,7 @@ package bitbar
 
 import (
 	"bytes"
+	"fmt"
 	"testing"
 	"time"
 
@@ -72,17 +73,17 @@ func TestPrinter_Print(t *testing.T) {
 			},
 		},
 		`🚇3️
---- | trim=false
+---
 Updated: Wed Jan 1 10:00:00 UTC | trim=false
 Affected lines: U1, 42, X999 | trim=false
 Important message | trim=false
 Simple text | trim=false
 Duration: Some time | trim=false
---- | trim=false
+---
 Updated: Wed Jan 1 10:00:00 UTC | trim=false
 Short message | trim=false
 Simple text | trim=false
---- | trim=false
+---
 Updated: Wed Jan 1 10:00:00 UTC | trim=false
 Affected lines: U1, 42, X999 | trim=false
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna | trim=false
@@ -111,5 +112,22 @@ Duration: Some time | trim=false
 
 	if got != testCase.want {
 		t.Fatalf("Wrong format printed. Got: \n%s\nWant: \n%s", got, testCase.want)
+	}
+}
+
+func TestPrinter_PrintError(t *testing.T) {
+	w := &mockWriter{}
+
+	underTest := &Printer{MaxLineLength: 120}
+	underTest.Interruptions(nil, fmt.Errorf("borked"))
+	underTest.Print(w)
+
+	want := `🚇⚠️
+---
+borked`
+	got := w.String()
+
+	if got != want {
+		t.Fatalf("Wrong format printed. Got: \n%s\nWant: \n%s", got, want)
 	}
 }

@@ -35,7 +35,7 @@ func (p *Printer) Interruptions(interruptions []interruption.Interruption, err e
 func (p *Printer) addInterruption(i interruption.Interruption) {
 	p.count++
 
-	p.writeln("", "---")
+	p.writeSeparator()
 	p.writeln("Updated", i.ModificationDate.String())
 	if len(i.Lines) > 0 {
 		p.writeln("Affected lines", i.Lines.String())
@@ -47,6 +47,10 @@ func (p *Printer) addInterruption(i interruption.Interruption) {
 	if i.Duration.Text != "" {
 		p.writeln("Duration", i.Duration.Text)
 	}
+}
+
+func (p *Printer) writeSeparator() {
+	p.builder.WriteString("---\n")
 }
 
 func (p *Printer) writeln(label, text string) {
@@ -66,7 +70,7 @@ func (p *Printer) writeln(label, text string) {
 // Print writes the previously added Interruptions out to a writer
 func (p *Printer) Print(w io.Writer) {
 	if p.err != nil {
-		_, _ = fmt.Fprintf(w, "🚇⚠️\n%s", p.err)
+		_, _ = fmt.Fprintf(w, "🚇⚠️\n---\n%s", p.err)
 		return
 	}
 
@@ -82,20 +86,24 @@ func (p *Printer) trimLineLength(text string) string {
 	linesIn := strings.Split(text, "\n")
 
 	for _, lineIn := range linesIn {
-		var shortLines []string
-		words := strings.Fields(lineIn)
-
-		var currentLine string
-		for _, word := range words {
-			if len(word)+len(currentLine) > p.MaxLineLength {
-				shortLines = append(shortLines, strings.TrimSpace(currentLine))
-				currentLine = ""
-			}
-			currentLine = fmt.Sprintf("%s %s", currentLine, word)
-		}
-		shortLines = append(shortLines, strings.TrimSpace(currentLine))
-		shortLinesOut = append(shortLinesOut, strings.Join(shortLines, "\n"))
+		shortLinesOut = append(shortLinesOut, strings.Join(p.reshapeLineIntoMaxLength(lineIn), "\n"))
 	}
 
 	return strings.Join(shortLinesOut, "\n")
+}
+
+func (p *Printer) reshapeLineIntoMaxLength(line string) []string {
+	var shortLines []string
+	words := strings.Fields(line)
+
+	var currentLine string
+	for _, word := range words {
+		if len(word)+len(currentLine) > p.MaxLineLength {
+			shortLines = append(shortLines, strings.TrimSpace(currentLine))
+			currentLine = ""
+		}
+		currentLine = fmt.Sprintf("%s %s", currentLine, word)
+	}
+	shortLines = append(shortLines, strings.TrimSpace(currentLine))
+	return shortLines
 }
