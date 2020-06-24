@@ -50,13 +50,17 @@ func (p *Printer) addInterruption(i interruption.Interruption) {
 }
 
 func (p *Printer) writeln(label, text string) {
+	if !strings.HasSuffix(text, "\n") {
+		text += "\n"
+	}
 	fullText := text
 	if label != "" {
 		fullText = fmt.Sprintf("%s: %s", label, text)
 	}
 	fullText = strings.Replace(fullText, "<br />", "\n", -1)
 
-	p.builder.WriteString(fmt.Sprintf("%s\n", p.trimLineLength(fullText)))
+	trimmedLines := strings.Split(p.trimLineLength(fullText), "\n")
+	p.builder.WriteString(strings.Join(trimmedLines, " | trim=false\n"))
 }
 
 // Print writes the previously added Interruptions out to a writer

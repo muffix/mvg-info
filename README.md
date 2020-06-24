@@ -3,7 +3,7 @@
 MVG info is a simple tool to fetch interruption notifications for Munich's public transport system. 
 It currently outputs the data in a [BitBar]-compatible way.
 
-![](https://user-images.githubusercontent.com/12208771/85631491-ebb29680-b675-11ea-9e7d-fe7ac65eeed7.png)
+![](https://user-images.githubusercontent.com/12208771/85635106-67641180-b67d-11ea-82a9-9530a68c1138.png)
 
 ## Installation
 
