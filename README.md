@@ -9,7 +9,7 @@ It currently outputs the data in a [BitBar]-compatible way.
 
 1. Install [BitBar]. If you're using [homebrew], you can use `brew cask install bitbar`.
 1. Install the plugin by doing one of the following options:
-    1. Click [here](bitbar://openPlugin?src=https://github.com/muffix/mvg-info/releases/latest/download/mvginfo.10m) and confirm
+    1. Copy the following link into your browser's address bar and confirm: `bitbar://openPlugin?src=https://github.com/muffix/mvg-info/releases/latest/download/mvginfo.10m` 
     1. Download the plugin from the [Releases] page into your BitBar plugin directory
     1. Clone the repository, run `make build` to compile, and then copy it into your BitBar plugin directory
     
