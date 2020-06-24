@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	longMockText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br />Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+	longMockText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br /><br />Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 )
 
 var (
@@ -72,30 +72,32 @@ func TestPrinter_Print(t *testing.T) {
 			},
 		},
 		`🚇3️
----
-Updated: Wed Jan 1 10:00:00 UTC
-Affected lines: U1, 42, X999
-Important message
-Simple text
-Duration: Some time
----
-Updated: Wed Jan 1 10:00:00 UTC
-Short message
-Simple text
----
-Updated: Wed Jan 1 10:00:00 UTC
-Affected lines: U1, 42, X999
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-Duration: Some time
+--- | trim=false
+Updated: Wed Jan 1 10:00:00 UTC | trim=false
+Affected lines: U1, 42, X999 | trim=false
+Important message | trim=false
+Simple text | trim=false
+Duration: Some time | trim=false
+--- | trim=false
+Updated: Wed Jan 1 10:00:00 UTC | trim=false
+Short message | trim=false
+Simple text | trim=false
+--- | trim=false
+Updated: Wed Jan 1 10:00:00 UTC | trim=false
+Affected lines: U1, 42, X999 | trim=false
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna | trim=false
+aliqua. | trim=false
+ | trim=false
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute | trim=false
+irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat | trim=false
+cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. | trim=false
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna | trim=false
+aliqua. | trim=false
+ | trim=false
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute | trim=false
+irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat | trim=false
+cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. | trim=false
+Duration: Some time | trim=false
 `,
 	}
 
