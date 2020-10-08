@@ -14,7 +14,7 @@ const (
 )
 
 var (
-	mockDate = interruption.Epoch(time.Date(2020, 01, 01, 10, 00, 00, 0, time.UTC))
+	mockDate = interruption.Epoch(time.Now())
 )
 
 type mockWriter struct {
@@ -74,18 +74,18 @@ func TestPrinter_Print(t *testing.T) {
 		},
 		`🚇3️
 ---
-Updated: Wed Jan 1 10:00:00 UTC | trim=false
-Affected lines: U1, 42, X999 | trim=false
+Updated now | trim=false
+Affected services: U1, 42, X999 | trim=false
 Important message | trim=false
 Simple text | trim=false
 Duration: Some time | trim=false
 ---
-Updated: Wed Jan 1 10:00:00 UTC | trim=false
+Updated now | trim=false
 Short message | trim=false
 Simple text | trim=false
 ---
-Updated: Wed Jan 1 10:00:00 UTC | trim=false
-Affected lines: U1, 42, X999 | trim=false
+Updated now | trim=false
+Affected services: U1, 42, X999 | trim=false
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna | trim=false
 aliqua. | trim=false
  | trim=false
