@@ -2,8 +2,10 @@ package bitbar
 
 import (
 	"fmt"
+	"github.com/dustin/go-humanize"
 	"io"
 	"strings"
+	"time"
 
 	"github.com/muffix/mvg-info/pkg/interruption"
 )
@@ -36,9 +38,9 @@ func (p *Printer) addInterruption(i interruption.Interruption) {
 	p.count++
 
 	p.writeSeparator()
-	p.writeln("Updated", i.ModificationDate.String())
+	p.writeln("", fmt.Sprintf("Updated %s", humanize.Time(time.Time(i.ModificationDate))))
 	if len(i.Lines) > 0 {
-		p.writeln("Affected lines", i.Lines.String())
+		p.writeln("Affected services", i.Lines.String())
 	}
 
 	p.writeln("", i.Title)
